@@ -60,7 +60,7 @@ class KafkaCheckCmd(object):
                     ),
                     args.json,
                 )
-            if args.first_broker_only and not(broker_ids):
+            if args.first_broker_only and not broker_ids:
                 terminate(
                     status_code.OK,
                     prepare_terminate_message(
@@ -95,4 +95,4 @@ def get_broker_ids(zk):
 
 def is_first_broker(broker_ids, broker_id):
     """Returns true if broker_id is the lowest broker id in the cluster, false otherwise."""
-    return not(broker_ids) and broker_id == min(broker_ids)
+    return True if broker_ids and broker_id == min(broker_ids) else False
